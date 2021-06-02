@@ -1,0 +1,20 @@
+<%-include('./partials/_header.ejs') %>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <table class="table">
+            <thead>
+                <th>id</th>
+                <th>nombre</th>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < usuariosList.length; i++) { %>
+                <tr>
+                    <td><%=usuariosList[i]._id%></td>
+                    <td><%=usuariosList[i].nombre%></td>
+                </tr>
+                <% } %>        
+            </tbody>
+        </table>
+    </div>
+</div>
+<%-include('./partials/_footer.ejs') %>
