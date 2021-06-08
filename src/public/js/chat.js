@@ -5,16 +5,39 @@ var chatId = 0;
 
 $(document).ready(function() {
 
+    $("#message").emojioneArea({
+        placeholder: "message",
+        pickerPosition: 'top'
+    });
+
     $(document).on('submit', '#messageForm', function(e) {
         
         e.preventDefault();
         var objectForm = {};
         $.each($(this).serializeArray(), function(i, m) {
             objectForm[m.name] = m.value;
-        })
-        $.post('new-message', objectForm, function(response) {
-            document.getElementById("message").value = "";
         });
+
+        var data = new FormData();
+        data.append('message', objectForm.message);
+        data.append('file', $("#file")[0].files[0]);
+
+        $.ajax({
+            type: 'POST',
+            url: 'new-message',
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                document.getElementById("message").value = "";
+                document.getElementById("file").value = "";
+                $("#message")[0].emojioneArea.setText("");
+            },
+            error: function() {
+                console.log("error");
+            }
+        });
+
     });
 
     $(document).on('click', '#contentChatHead', function() {
@@ -33,20 +56,27 @@ function getAllMessages() {
         $.post('get-messages', { id: chatId }, function(response) {
             
             var html = "";
-            var messageArray = response.messages;
+            var messageArray = response.messagesArray;
             messageArray.forEach(function(m) {
-                chatId = m.counter;
+                chatId = m.message.counter;
+                var imageMessageHtml = "";
+                m.images.forEach(function(img) {
+                    imageMessageHtml = '<img src="/images/' + img.url + '" alt="image" width="150" />';
+                });
                 html = '<div class="col-md-12 p-0 m-o mb-2 mt-2 pl-3">' +
                             '<div class="content-chat-messages-container">' +
-                                '<p>' + m.message + '</p>' +
+                                '<p>' + m.message.message + '</p>' +
+                                imageMessageHtml +
                             '</div>' +
                             '<div class="col-md-12 p-0 m-0">' +
-                                '<span>' + moment(m.fecha).format('h:mm a') + '</span>' +
+                                '<span>' + moment(m.message.fecha).format('h:mm a') + '</span>' +
                             '</div>' +
                         '</div>';
                         
                 $("#contentChatMessages").append(html);
-                document.getElementById("contentChatMessages").scrollTop = document.getElementById("contentChatMessages").scrollHeight;
+                setTimeout(() => {
+                    document.getElementById("contentChatMessages").scrollTop = document.getElementById("contentChatMessages").scrollHeight;
+                }, 1000);
             });
 
         });

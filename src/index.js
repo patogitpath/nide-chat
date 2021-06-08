@@ -3,6 +3,7 @@ import path from "path";
 import morgan from "morgan";
 import Customer from "./routes/Customer";
 import connect from "./connect";
+import upload from "express-fileupload";
 
 const app = express();
 connect();
@@ -14,6 +15,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 app.use(morgan('dev'));
+
+app.use(upload());
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
