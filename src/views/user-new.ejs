@@ -1,0 +1,33 @@
+<%-include('./partials/_header.ejs')%>
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <form action="/new-user-post" method="POST">
+                    <div class="form-group mb-2">
+                        <label for="nombre" class="font-weight-bold">Nombre:</label>
+                        <input type="text" name="nombre" class="form-control" placeholder="nombre" autofocus />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="apellidos" class="font-weight-bold">Apellidos:</label>
+                        <input type="text" name="apellidos" class="form-control" placeholder="apellidos"/>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="edad" class="font-weight-bold">Edad:</label>
+                        <input type="number" name="edad" class="form-control" placeholder="edad"/>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="carrera" class="font-weight-bold">Carrera:</label>
+                        <select name="carrera" class="form-control">
+                            <% for(var i = 0; i < carreras.length; i++) { %>
+                            <option value="<%=carreras[i]._id%>"><%=carreras[i].nombre%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <button class="btn btn-success form-control" type="submit">save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('./partials/_footer.ejs')%>

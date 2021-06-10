@@ -24,7 +24,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'new-message',
+            url: '/new-message',
             data: data,
             processData: false,
             contentType: false,
@@ -53,7 +53,7 @@ function getAllMessages() {
     setInterval(() => {
         
 
-        $.post('get-messages', { id: chatId }, function(response) {
+        $.post('/get-messages', { id: chatId }, function(response) {
             
             var html = "";
             var messageArray = response.messagesArray;

@@ -1,16 +1,21 @@
 <%- include('./partials/_header.ejs') %>
 <div class="row">
     <div class="col-md-6 mx-auto">
+        <a class="btn btn-primary mb-2" href="/carrera-new">new categoria</a>
         <table class="table">
             <thead>
                 <th>id</th>
                 <th>nombre</th>
+                <th>edith</th>
+                <th>delete</th>
             </thead>
             <tbody>
                 <% for(var i = 0; i < carreraList.length; i++) { %>
                 <tr>
                     <td><%=carreraList[i]._id%></td>
                     <td><%=carreraList[i].nombre%></td>
+                    <td><a class="btn btn-success" href="/carrera-edith/<%=carreraList[i]._id%>">edith</a></td>
+                    <td><a class="btn btn-danger" href="/delete-carrera/<%=carreraList[i]._id%>">delete</a></td>
                 </tr>
                 <% } %>        
             </tbody>

@@ -1,16 +1,25 @@
 <%-include('./partials/_header.ejs') %>
 <div class="row">
     <div class="col-md-6 mx-auto">
+        <a class="btn btn-primary mb-2" href="/new-user">new user</a>
         <table class="table">
             <thead>
-                <th>id</th>
+                <th>#</th>
                 <th>nombre</th>
+                <th>apellidos</th>
+                <th>edad</th>
+                <th>edith</th>
+                <th>delete</th>
             </thead>
             <tbody>
                 <% for(var i = 0; i < usuariosList.length; i++) { %>
                 <tr>
-                    <td><%=usuariosList[i]._id%></td>
+                    <td><%=i+1%></td>
                     <td><%=usuariosList[i].nombre%></td>
+                    <td><%=usuariosList[i].apellidos%></td>
+                    <td><%=usuariosList[i].edad%></td>
+                    <td><a class="btn btn-success" href="/edith-user/<%=usuariosList[i]._id%>">edith</a></td>
+                    <td><a class="btn btn-danger" href="/delete-user/<%=usuariosList[i]._id%>">delete</a></td>
                 </tr>
                 <% } %>        
             </tbody>

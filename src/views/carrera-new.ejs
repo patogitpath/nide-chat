@@ -1,0 +1,17 @@
+<%-include('./partials/_header.ejs')%>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <form action="/new-carrera-post" method="POST">
+                    <div class="form-group mb-2">
+                        <label for="nombre" class="font-weight-bold">Nombre:</label>
+                        <input type="text" name="nombre" class="form-control" placeholder="nombre" required autofocus />
+                    </div>
+                    <button type="submit" class="btn btn-success form-control">save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%-include('./partials/_footer.ejs')%>
