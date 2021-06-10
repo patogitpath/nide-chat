@@ -60,6 +60,8 @@ controller.edithUserPost = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
 
+    console.log(body);
+
     try {
         
         const dataUser = await Usuario.findById(id);
